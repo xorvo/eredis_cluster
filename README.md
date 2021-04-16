@@ -2,6 +2,10 @@
 
 eredis_cluster is a wrapper for eredis to support cluster mode of Redis 3.0.0+
 
+[![Build Status](https://github.com/Nordix/eredis_cluster/workflows/CI/badge.svg)](https://github.com/Nordix/eredis_cluster)
+[![Hex pm](https://img.shields.io/hexpm/v/eredis_cluster.svg?style=flat)](https://hex.pm/packages/eredis_cluster)
+[![Hex.pm](https://img.shields.io/hexpm/dt/eredis_cluster.svg)](https://hex.pm/packages/eredis_cluster)
+
 ## Contents
 
 * [Improvements compared to adrienmo/eredis_cluster](#improvements-compared-to-adrienmoeredis_cluster)
@@ -48,6 +52,8 @@ eredis_cluster is a wrapper for eredis to support cluster mode of Redis 3.0.0+
 
 For the full reference manual, see the generated documentation in
 [doc/eredis_cluster.md](doc/eredis_cluster.md).
+
+Published documentation can also be found on [hexdocs](https://hexdocs.pm/eredis_cluster/).
 
 ```erlang
 %% Start the application and, if init nodes are defined in the application

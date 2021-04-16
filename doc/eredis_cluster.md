@@ -28,132 +28,158 @@ to the connection pool to a particular Redis node.
 
 
 
-### <a name="type-anystring">anystring()</a> ###
+<a name="type-anystring"></a>
+### anystring() ###
 
 
 <pre><code>
 anystring() = string() | bitstring()
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-optimistic_locking_error_result">optimistic_locking_error_result()</a> ###
+<a name="type-optimistic_locking_error_result"></a>
+### optimistic_locking_error_result() ###
 
 
 <pre><code>
 optimistic_locking_error_result() = {error, resource_busy} | {error, <a href="#type-redis_error_result">redis_error_result()</a>}
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-optimistic_locking_result">optimistic_locking_result()</a> ###
+<a name="type-optimistic_locking_result"></a>
+### optimistic_locking_result() ###
 
 
 <pre><code>
 optimistic_locking_result() = <a href="#type-optimistic_locking_error_result">optimistic_locking_error_result()</a> | {{ok, undefined}, any()} | {{ok, <a href="#type-redis_success_result">redis_success_result()</a>}, any()} | {{ok, [<a href="#type-redis_success_result">redis_success_result()</a>]}, any()}
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-options">options()</a> ###
+<a name="type-options"></a>
+### options() ###
 
 
 <pre><code>
 options() = [{term(), term()}]
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-redis_command">redis_command()</a> ###
+<a name="type-redis_command"></a>
+### redis_command() ###
 
 
 <pre><code>
 redis_command() = <a href="#type-redis_simple_command">redis_simple_command()</a> | <a href="#type-redis_pipeline_command">redis_pipeline_command()</a>
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-redis_error_result">redis_error_result()</a> ###
+<a name="type-redis_error_result"></a>
+### redis_error_result() ###
 
 
 <pre><code>
 redis_error_result() = bitstring() | no_connection | invalid_cluster_command | tcp_closed
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-redis_pipeline_command">redis_pipeline_command()</a> ###
+<a name="type-redis_pipeline_command"></a>
+### redis_pipeline_command() ###
 
 
 <pre><code>
 redis_pipeline_command() = [<a href="#type-redis_simple_command">redis_simple_command()</a>]
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-redis_pipeline_result">redis_pipeline_result()</a> ###
+<a name="type-redis_pipeline_result"></a>
+### redis_pipeline_result() ###
 
 
 <pre><code>
 redis_pipeline_result() = [<a href="#type-redis_simple_result">redis_simple_result()</a>]
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-redis_result">redis_result()</a> ###
+<a name="type-redis_result"></a>
+### redis_result() ###
 
 
 <pre><code>
 redis_result() = <a href="#type-redis_simple_result">redis_simple_result()</a> | <a href="#type-redis_pipeline_result">redis_pipeline_result()</a> | <a href="#type-optimistic_locking_result">optimistic_locking_result()</a>
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-redis_simple_command">redis_simple_command()</a> ###
+<a name="type-redis_simple_command"></a>
+### redis_simple_command() ###
 
 
 <pre><code>
 redis_simple_command() = [<a href="#type-anystring">anystring()</a> | integer()]
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-redis_simple_result">redis_simple_result()</a> ###
+<a name="type-redis_simple_result"></a>
+### redis_simple_result() ###
 
 
 <pre><code>
 redis_simple_result() = {ok, <a href="#type-redis_success_result">redis_success_result()</a>} | {error, <a href="#type-redis_error_result">redis_error_result()</a>}
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-redis_success_result">redis_success_result()</a> ###
+<a name="type-redis_success_result"></a>
+### redis_success_result() ###
 
 
 <pre><code>
 redis_success_result() = bitstring() | undefined
-</code></pre>
+</code>
+</pre>
 
 
 
 
-### <a name="type-redis_transaction_result">redis_transaction_result()</a> ###
+<a name="type-redis_transaction_result"></a>
+### redis_transaction_result() ###
 
 
 <pre><code>
 redis_transaction_result() = {ok, [<a href="#type-redis_success_result">redis_success_result()</a>]} | {ok, undefined} | {error, <a href="#type-redis_error_result">redis_error_result()</a>}
-</code></pre>
+</code>
+</pre>
 
 <a name="index"></a>
 
@@ -172,7 +198,8 @@ Execute a simple or pipelined command on a specific node.</td></tr><tr><td valig
 (a worker) in the function passed to the <code>transaction/2</code> function.</td></tr><tr><td valign="top"><a href="#scan-4">scan/4</a></td><td>Performs a SCAN on a specific node in the Redis cluster.</td></tr><tr><td valign="top"><a href="#start-0">start/0</a></td><td>Start application.</td></tr><tr><td valign="top"><a href="#stop-0">stop/0</a></td><td>Stop application.</td></tr><tr><td valign="top"><a href="#transaction-1">transaction/1</a></td><td>Function to execute a pipeline of commands as a transaction command, by
 wrapping it in MULTI and EXEC.</td></tr><tr><td valign="top"><a href="#transaction-2">transaction/2</a></td><td>Execute a function on a single connection.</td></tr><tr><td valign="top"><a href="#update_hash_field-3">update_hash_field/3</a></td><td>Update the value of a field stored in a hash by applying the function
 passed in the argument.</td></tr><tr><td valign="top"><a href="#update_key-2">update_key/2</a></td><td>Update the value of a key by applying the function passed in the
-argument.</td></tr></table>
+argument.</td></tr>
+</table>
 
 
 <a name="functions"></a>
@@ -185,7 +212,8 @@ argument.</td></tr></table>
 
 <pre><code>
 connect(InitServers) -&gt; ok
-</code></pre>
+</code>
+</pre>
 
 <ul class="definitions"><li><code>InitServers = [{Address::string(), Port::<a href="inet.md#type-port_number">inet:port_number()</a>}]</code></li></ul>
 
@@ -203,7 +231,8 @@ in the cluster are retrieved from one of the init nodes.
 
 <pre><code>
 connect(InitServers, Options) -&gt; ok
-</code></pre>
+</code>
+</pre>
 
 <ul class="definitions"><li><code>InitServers = [{Address::string(), Port::<a href="inet.md#type-port_number">inet:port_number()</a>}]</code></li><li><code>Options = <a href="#type-options">options()</a></code></li></ul>
 
@@ -218,8 +247,9 @@ provided, can be used to override options set using `application:set_env/3`.
 
 <pre><code>
 disconnect(Nodes::[atom()]) -&gt; ok
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Disconnects a set of nodes.
 
@@ -229,7 +259,8 @@ Disconnects a set of nodes.
 
 <pre><code>
 eval(Script, ScriptHash, Keys, Args) -&gt; <a href="#type-redis_result">redis_result()</a>
-</code></pre>
+</code>
+</pre>
 
 <ul class="definitions"><li><code>Script = <a href="#type-anystring">anystring()</a></code></li><li><code>ScriptHash = <a href="#type-anystring">anystring()</a></code></li><li><code>Keys = [<a href="#type-anystring">anystring()</a>]</code></li><li><code>Args = [<a href="#type-anystring">anystring()</a>]</code></li></ul>
 
@@ -252,8 +283,9 @@ __See also:__ [load_script/1](#load_script-1).
 
 <pre><code>
 flushdb() -&gt; ok | {error, Reason::bitstring()}
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Perform flushdb command on each node of the redis cluster
 
@@ -265,8 +297,9 @@ This is equivalent to calling `qa(["FLUSHDB"])` except for the return value.
 
 <pre><code>
 get_all_pools() -&gt; [atom()]
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Returns the connection pools for all Redis nodes.
 
@@ -281,8 +314,9 @@ __See also:__ [qn/2](#qn-2), [transaction/2](#transaction-2).
 
 <pre><code>
 get_pool_by_command(Command::<a href="#type-redis_command">redis_command()</a>) -&gt; atom() | undefined
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Returns the connection pool for the Redis node where a command should be
 executed.
@@ -297,8 +331,9 @@ __See also:__ [get_pool_by_key/1](#get_pool_by_key-1).
 
 <pre><code>
 get_pool_by_key(Key::<a href="#type-anystring">anystring()</a>) -&gt; atom() | undefined
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Returns the connection pool for the Redis node responsible for the key.
 
@@ -308,8 +343,9 @@ Returns the connection pool for the Redis node responsible for the key.
 
 <pre><code>
 load_script(Script::string()) -&gt; <a href="#type-redis_result">redis_result()</a>
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Load LUA script to all master nodes in the Redis cluster.
 
@@ -328,7 +364,8 @@ __See also:__ [eval/4](#eval-4).
 
 <pre><code>
 optimistic_locking_transaction(WatchedKey, GetCommand, UpdateFunction) -&gt; Result
-</code></pre>
+</code>
+</pre>
 
 <ul class="definitions"><li><code>WatchedKey = <a href="#type-anystring">anystring()</a></code></li><li><code>GetCommand = <a href="#type-redis_command">redis_command()</a></code></li><li><code>UpdateFunction = fun((<a href="#type-redis_result">redis_result()</a>) -&gt; <a href="#type-redis_pipeline_command">redis_pipeline_command()</a>)</code></li><li><code>Result = {ok, {<a href="#type-redis_success_result">redis_success_result()</a>, any()}} | {ok, {[<a href="#type-redis_success_result">redis_success_result()</a>], any()}} | <a href="#type-optimistic_locking_error_result">optimistic_locking_error_result()</a></code></li></ul>
 
@@ -355,8 +392,9 @@ EXEC, the sequence is retried.
 
 <pre><code>
 q(Command::<a href="#type-redis_command">redis_command()</a>) -&gt; <a href="#type-redis_result">redis_result()</a>
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 This function executes simple or pipelined command on a single redis
 node, which is selected according to the first key in the command.
@@ -367,8 +405,9 @@ node, which is selected according to the first key in the command.
 
 <pre><code>
 q_noreply(Command::<a href="#type-redis_command">redis_command()</a>) -&gt; ok
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Executes a simple or pipeline of commands on a single Redis node, but
 ignoring any response from Redis. (Fire and forget)
@@ -381,7 +420,8 @@ Errors are ignored and there are no automatic retries.
 
 <pre><code>
 qa(Command) -&gt; Result
-</code></pre>
+</code>
+</pre>
 
 <ul class="definitions"><li><code>Command = <a href="#type-redis_command">redis_command()</a></code></li><li><code>Result = [<a href="#type-redis_transaction_result">redis_transaction_result()</a>] | {error, no_connection}</code></li></ul>
 
@@ -394,7 +434,8 @@ fails, the mapping is refreshed and the query is retried.
 
 <pre><code>
 qa2(Command) -&gt; Result
-</code></pre>
+</code>
+</pre>
 
 <ul class="definitions"><li><code>Command = <a href="#type-redis_command">redis_command()</a></code></li><li><code>Result = [{Node::atom(), <a href="#type-redis_result">redis_result()</a>}] | {error, no_connection}</code></li></ul>
 
@@ -408,8 +449,9 @@ When a query to the master fail refresh the mapping and try again.
 
 <pre><code>
 qk(Command::<a href="#type-redis_command">redis_command()</a>, Key::<a href="#type-anystring">anystring()</a>) -&gt; <a href="#type-redis_result">redis_result()</a>
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Executes a simple or pipeline of command on the Redis node where the
 provided key resides.
@@ -420,8 +462,9 @@ provided key resides.
 
 <pre><code>
 qmn(Commands::<a href="#type-redis_pipeline_command">redis_pipeline_command()</a>) -&gt; <a href="#type-redis_pipeline_result">redis_pipeline_result()</a>
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Multi node query. Each command in a list of commands is sent
 to the Redis node responsible for the key affected by that
@@ -433,7 +476,8 @@ command. Only simple commands operating on a single key are supported.
 
 <pre><code>
 qn(Command, Node) -&gt; <a href="#type-redis_result">redis_result()</a>
-</code></pre>
+</code>
+</pre>
 
 <ul class="definitions"><li><code>Command = <a href="#type-redis_command">redis_command()</a></code></li><li><code>Node = atom()</code></li></ul>
 
@@ -449,8 +493,9 @@ __See also:__ [get_all_pools/0](#get_all_pools-0), [qk/2](#qk-2).
 
 <pre><code>
 qp(Commands::<a href="#type-redis_pipeline_command">redis_pipeline_command()</a>) -&gt; <a href="#type-redis_pipeline_result">redis_pipeline_result()</a>
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Executes a pipeline of commands.
 
@@ -464,8 +509,9 @@ __See also:__ [q/1](#q-1).
 
 <pre><code>
 qw(Connection::pid(), Commands::<a href="#type-redis_command">redis_command()</a>) -&gt; <a href="#type-redis_result">redis_result()</a>
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Function to be used for direct calls to an `eredis` connection instance
 (a worker) in the function passed to the `transaction/2` function.
@@ -481,7 +527,8 @@ __See also:__ [transaction/2](#transaction-2).
 
 <pre><code>
 scan(Node, Cursor, Pattern, Count) -&gt; Result
-</code></pre>
+</code>
+</pre>
 
 <ul class="definitions"><li><code>Node = atom()</code></li><li><code>Cursor = integer()</code></li><li><code>Pattern = <a href="#type-anystring">anystring()</a></code></li><li><code>Count = integer()</code></li><li><code>Result = <a href="#type-redis_result">redis_result()</a> | {error, Reason::binary() | atom()}</code></li></ul>
 
@@ -498,8 +545,9 @@ __See also:__ [get_all_pools/0](#get_all_pools-0), [qn/1](#qn-1).
 
 <pre><code>
 start() -&gt; ok | {error, Reason::term()}
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Start application.
 
@@ -517,8 +565,9 @@ later using `connect/1,2`.
 
 <pre><code>
 stop() -&gt; ok | {error, Reason::term()}
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Stop application.
 
@@ -530,8 +579,9 @@ The same as `application:stop(eredis_cluster)`.
 
 <pre><code>
 transaction(Commands::<a href="#type-redis_pipeline_command">redis_pipeline_command()</a>) -&gt; <a href="#type-redis_transaction_result">redis_transaction_result()</a>
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Function to execute a pipeline of commands as a transaction command, by
 wrapping it in MULTI and EXEC. Returns the result of EXEC, which is the list
@@ -546,7 +596,8 @@ of responses for each of the commands.
 
 <pre><code>
 transaction(Transaction, Key::Key | Pool) -&gt; <a href="#type-redis_result">redis_result()</a>
-</code></pre>
+</code>
+</pre>
 
 <ul class="definitions"><li><code>Key = <a href="#type-anystring">anystring()</a></code></li><li><code>Pool = atom()</code></li><li><code>Transaction = fun((Connection::pid()) -&gt; <a href="#type-redis_result">redis_result()</a>)</code></li></ul>
 
@@ -570,7 +621,8 @@ __See also:__ [qw/2](#qw-2).
 
 <pre><code>
 update_hash_field(Key, Field, UpdateFunction) -&gt; Result
-</code></pre>
+</code>
+</pre>
 
 <ul class="definitions"><li><code>Key = <a href="#type-anystring">anystring()</a></code></li><li><code>Field = <a href="#type-anystring">anystring()</a></code></li><li><code>UpdateFunction = fun((any()) -&gt; any())</code></li><li><code>Result = {ok, {[any()], any()}} | {error, <a href="#type-redis_error_result">redis_error_result()</a>}</code></li></ul>
 
@@ -586,7 +638,8 @@ __See also:__ [optimistic_locking_transaction/3](#optimistic_locking_transaction
 
 <pre><code>
 update_key(Key, UpdateFunction) -&gt; Result
-</code></pre>
+</code>
+</pre>
 
 <ul class="definitions"><li><code>Key = <a href="#type-anystring">anystring()</a></code></li><li><code>UpdateFunction = fun((any()) -&gt; any())</code></li><li><code>Result = <a href="#type-redis_transaction_result">redis_transaction_result()</a></code></li></ul>
 
