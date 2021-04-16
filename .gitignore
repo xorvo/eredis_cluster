@@ -1,5 +1,4 @@
 .eunit
-deps
 *.o
 *.beam
 *.plt
@@ -10,7 +9,17 @@ rel/example_project
 .rebar
 _build/
 priv/
-/doc/README.md
-/doc/erlang.png
-/doc/edoc-info
-/doc/stylesheet.css
+
+# edoc and edown
+doc/README.md
+doc/erlang.png
+doc/edoc-info
+doc/stylesheet.css
+
+# mix
+doc/*.html
+doc/*.epub
+doc/.build
+doc/dist
+deps/
+mix.lock

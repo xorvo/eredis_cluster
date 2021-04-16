@@ -25,7 +25,8 @@ useful for advanced scenarios.
 ## Function Index ##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#get_cluster_nodes-0">get_cluster_nodes/0</a></td><td>Get cluster nodes information.</td></tr><tr><td valign="top"><a href="#get_cluster_slots-0">get_cluster_slots/0</a></td><td>Get cluster slots information.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#get_cluster_nodes-0">get_cluster_nodes/0</a></td><td>Get cluster nodes information.</td></tr><tr><td valign="top"><a href="#get_cluster_slots-0">get_cluster_slots/0</a></td><td>Get cluster slots information.</td></tr>
+</table>
 
 
 <a name="functions"></a>
@@ -38,8 +39,9 @@ useful for advanced scenarios.
 
 <pre><code>
 get_cluster_nodes() -&gt; [[bitstring()]]
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Get cluster nodes information.
 Returns a list of node elements, each in the form:
@@ -56,8 +58,9 @@ See: https://redis.io/commands/cluster-nodes#serialization-format
 
 <pre><code>
 get_cluster_slots() -&gt; [[bitstring() | [bitstring()]]]
-</code></pre>
-<br />
+</code>
+</pre>
+
 
 Get cluster slots information.
 

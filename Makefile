@@ -47,8 +47,27 @@ cover:
 coverview: cover
 	xdg-open _build/test/cover/index.html
 
+# Generate and patch documentation.
+# The patching is needed to be able to generate documentation via Elixirs mix.
+# Following changes are needed:
+# - Handle link targets in headers, changes:
+#     '### <a name="link">Header</a> ###' to
+#     '<a name="link"></a> ### Header ###'
+# - Newline needed for before following tags:
+#     </table> </dd> </pre>
+# - Removal of unneeded line breaks (visual only)
+#
+# Note: sed on macOS requires explicit in-place extensions (-i <extension>)
 edoc:
 	@$(REBAR) edoc
+	@for file in doc/*.md ; do \
+		sed -i.bak 's|### <a name="\(.*\)">\(.*\)</a> ###|<a name="\1"></a>\n### \2 ###|g' $${file} ; \
+		sed -i.bak 's|</table>|\n</table>|g' $${file} ; \
+		sed -i.bak 's|</dd>|\n</dd>|g' $${file} ; \
+		sed -i.bak 's|</code></pre>|</code>\n</pre>|g' $${file} ; \
+		sed -i.bak 's|<br />||g' $${file} ; \
+		rm $${file}.bak ; \
+	done
 
 start: start-tcp start-tls
 
