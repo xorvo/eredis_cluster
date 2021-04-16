@@ -69,6 +69,16 @@ edoc:
 		rm $${file}.bak ; \
 	done
 
+publish: edoc
+	@touch doc/.build # Prohibit ex_doc to remove .md files
+	@mix docs
+	@if [ ! -z "$$(git status --untracked-file=no --porcelain)" ]; \
+	then \
+		echo "Error: Working directory is dirty. Please commit before publish!"; \
+		exit 1; \
+	fi
+	mix hex.publish
+
 start: start-tcp start-tls
 
 start-tcp:
