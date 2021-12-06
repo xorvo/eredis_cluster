@@ -19,7 +19,7 @@
 -export([connect/1, connect/2, disconnect/1]).
 
 %% Generic redis call
--export([q/1, qk/2, q_noreply/1, qp/1, qa/1, qa2/1, qn/2, qw/2, qmn/1]).
+-export([q/1, q/2, qk/2, q_noreply/1, qp/1, qa/1, qa2/1, qn/2, qw/2, qmn/1]).
 -export([transaction/1, transaction/2]).
 
 %% Specific redis command implementation
@@ -121,6 +121,16 @@ disconnect(Nodes) ->
 -spec q(Command::redis_command()) -> redis_result().
 q(Command) ->
     query(Command).
+
+%% =============================================================================
+%% @doc This function executes simple or pipelined command on a specific redis
+%% node, which is selected according to the slot number provided in the second
+%% argument.
+%% @end
+%% =============================================================================
+-spec q(Command::redis_command(), Slot::integer()) -> redis_result().
+q(Command, Slot) ->
+    query(Command, Slot, 0).
 
 %% @doc Executes a simple or pipeline of command on the Redis node where the
 %% provided key resides.
