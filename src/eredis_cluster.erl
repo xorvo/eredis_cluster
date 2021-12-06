@@ -34,10 +34,8 @@
 %% Specific pools (specific Redis nodes)
 -export([get_pool_by_command/1, get_pool_by_key/1, get_all_pools/0]).
 
--ifdef(TEST).
 -export([get_key_slot/1]).
 -export([get_key_from_command/1]).
--endif.
 
 -include("eredis_cluster.hrl").
 
