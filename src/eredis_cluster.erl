@@ -498,12 +498,13 @@ split_by_pools([], _Index, CmdAcc, MapAcc, State) ->
 
 query(Command) ->
     PoolKey = get_key_from_command(Command),
-    query(Command, PoolKey).
+    Slot = get_key_slot(PoolKey),
+    query(Command, Slot).
 
 query(_, undefined) ->
     {error, invalid_cluster_command};
-query(Command, PoolKey) ->
-    query(Command, PoolKey, 0).
+query(Command, Slot) ->
+    query(Command, Slot, 0).
 
 query_noreply(_, undefined) ->
     {error, invalid_cluster_command};
@@ -517,14 +518,13 @@ query_noreply(Command, PoolKey) ->
 
 query(_, _, ?REDIS_CLUSTER_REQUEST_TTL) ->
     {error, no_connection};
-query(Command, PoolKey, Counter) ->
+query(Command, Slot, Counter) ->
     throttle_retries(Counter),
-    Slot = get_key_slot(PoolKey),
     {Pool, Version} = eredis_cluster_monitor:get_pool_by_slot(Slot),
     Result0 = eredis_cluster_pool:transaction(Pool, fun(W) -> qw(W, Command) end),
     Result = handle_redirects(Command, Result0, Version),
     case handle_transaction_result(Result, Version) of
-        retry  -> query(Command, PoolKey, Counter + 1);
+        retry  -> query(Command, Slot, Counter + 1);
         Result -> Result
     end.
 
